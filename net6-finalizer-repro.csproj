@@ -11,4 +11,14 @@
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>
+  <!-- Uncomment to solve problem -->
+  <!-- <Target Name="UpdateMonoRuntimePacks" BeforeTargets="ProcessFrameworkReferences">
+    <ItemGroup>
+      <KnownRuntimePack 
+          Update="Microsoft.NETCore.App"
+          Condition=" '%(KnownRuntimePack.TargetFramework)' == 'net6.0' "
+          LatestRuntimeFrameworkVersion="6.0.0-rtm.21472.13"
+      />
+    </ItemGroup>
+  </Target> -->
 </Project>

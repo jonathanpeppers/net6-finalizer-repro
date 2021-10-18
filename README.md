@@ -29,9 +29,5 @@ The app crashes with:
 
 I used an x86_64 API 28 emulator, but I would guess anything x86_64 would hit this issue.
 
-If you remove `Parallel.For()`, the issue goes away:
-
-```diff
---Parallel.For (0, 100, i => Dispose_Finalized (i));
-++Dispose_Finalized (0);
-```
+If you uncomment the `UpdateMonoRuntimePacks` MSBuild target, it uses
+a version of the Mono runtime packs that don't have the issue.
