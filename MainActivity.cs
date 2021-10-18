@@ -13,10 +13,11 @@ namespace net6_finalizer_repro
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            Dispose_Finalized ();
+            // NOTE: this only broke when I used Parallel.For()
+            Parallel.For (0, 100, i => Dispose_Finalized (i));
         }
 
-        public void Dispose_Finalized ()
+        public void Dispose_Finalized (int i)
         {
             var d = false;
             var f = false;
@@ -28,7 +29,7 @@ namespace net6_finalizer_repro
             GC.WaitForPendingFinalizers ();
             JniEnvironment.Runtime.ValueManager.CollectPeers ();
             GC.WaitForPendingFinalizers ();
-            Console.WriteLine ($"Values: d={d}, f={f}");
+            Console.WriteLine ($"Actual Values: i={i}, d={d}, f={f}");
             Assert (!d, "d should be false");
             Assert (f, "f should be true");
         }
