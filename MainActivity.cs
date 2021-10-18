@@ -13,8 +13,8 @@ namespace net6_finalizer_repro
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            // NOTE: this only broke when I used Parallel.For()
-            Parallel.For (0, 100, i => Dispose_Finalized (i));
+            for (int i = 0 ; i < 4; i++)
+                Dispose_Finalized (i);
         }
 
         public void Dispose_Finalized (int i)
